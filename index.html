@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawdle · The alarm clock that's in no hurry</title>
+<meta name="description" content="Dawdle wakes you up gently, slowly and with zero guilt. A fictional product landing page: Day 3 of 7 days, 7 websites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fff6e6;
+    --cream2: #ffeccf;
+    --ink: #2b2540;
+    --ink-soft: #675f7d;
+    --coral: #ff6b4a;
+    --peach: #ffb88c;
+    --sky: #cfe6ff;
+    --lav: #b9a7ff;
+    --mint: #bfeadb;
+    --card: #ffffff;
+    --r: 28px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.55; overflow-x: hidden; }
+  h1, h2, h3, .display { font-family: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; letter-spacing: -.03em; line-height: 1; }
+  em, .serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+  a { color: inherit; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+  section { padding: 84px 0; }
+  .kicker { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); margin-bottom: 14px; }
+  h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 800; }
+  h2 em { color: var(--coral); }
+  .sub { color: var(--ink-soft); font-size: clamp(1.02rem, 2vw, 1.2rem); max-width: 560px; margin-top: 16px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; border: 2px solid var(--ink); border-radius: 999px; padding: 14px 26px; background: var(--coral); color: #fff; box-shadow: 4px 4px 0 var(--ink); transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--lav); outline-offset: 3px; }
+
+  /* nav */
+  header.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,246,230,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 2px solid transparent; transition: border-color .3s; }
+  header.nav.scrolled { border-color: var(--ink); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.45rem; letter-spacing: -.03em; text-decoration: none; }
+  .brand i { width: 30px; height: 30px; border-radius: 50%; background: var(--coral); border: 2px solid var(--ink); display: grid; place-items: center; position: relative; }
+  .brand i::before { content: ''; width: 2px; height: 10px; background: var(--ink); position: absolute; top: 5px; left: 12px; border-radius: 2px; }
+  .brand i::after { content: ''; width: 8px; height: 2px; background: var(--ink); position: absolute; top: 14px; left: 12px; border-radius: 2px; transform-origin: left; animation: tick 24s linear infinite; }
+  @keyframes tick { to { transform: rotate(360deg); } }
+  .nav-links { display: flex; align-items: center; gap: 26px; font-weight: 500; font-size: .95rem; }
+  .nav-links a { text-decoration: none; color: var(--ink-soft); } .nav-links a:hover { color: var(--ink); }
+  .nav-links .btn { padding: 9px 18px; font-size: .9rem; color: #fff; box-shadow: 3px 3px 0 var(--ink); }
+  @media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
+
+  /* hero */
+  .hero { padding: 54px 0 70px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  .pill { display: inline-flex; gap: 8px; align-items: center; background: var(--mint); border: 2px solid var(--ink); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 700; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(3.4rem, 10.5vw, 7.6rem); font-weight: 800; }
+  .hero h1 em { color: var(--coral); display: inline-block; }
+  .hero p.lede { margin: 22px 0 30px; font-size: clamp(1.1rem, 2.3vw, 1.35rem); color: var(--ink-soft); max-width: 520px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .fine { margin-top: 16px; font-size: .88rem; color: var(--ink-soft); }
+
+  .device { position: relative; border: 3px solid var(--ink); border-radius: 36px; overflow: hidden; background: linear-gradient(180deg, #1f2250, #5e4b97 40%, #ff9d7c 78%, #ffd9a0); background-size: 100% 300%; animation: dawn 40s ease-in-out infinite alternate; box-shadow: 10px 10px 0 var(--ink); aspect-ratio: 4 / 4.6; max-width: 480px; margin-inline: auto; width: 100%; }
+  @keyframes dawn { from { background-position: 0 0; } to { background-position: 0 100%; } }
+  .device .sun { position: absolute; left: 50%; bottom: -70px; width: 150px; height: 150px; margin-left: -75px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff6c9, #ffcf6a 60%, #ffa64d); box-shadow: 0 0 80px 30px rgba(255,196,100,.55); animation: rise 40s ease-in-out infinite alternate; }
+  @keyframes rise { to { transform: translateY(-190px); } }
+  .cloud { position: absolute; height: 26px; width: 90px; background: rgba(255,255,255,.75); border-radius: 99px; animation: drift linear infinite; }
+  .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
+  .cloud::before { width: 40px; height: 40px; left: 12px; top: -20px; } .cloud::after { width: 30px; height: 30px; left: 44px; top: -13px; }
+  .c1 { top: 22%; animation-duration: 55s; left: -100px; } .c2 { top: 40%; animation-duration: 80s; animation-delay: -30s; left: -100px; transform: scale(.7); opacity: .8; } .c3 { top: 12%; animation-duration: 95s; animation-delay: -60s; left: -100px; transform: scale(1.2); opacity: .6; }
+  @keyframes drift { to { transform: translateX(640px) } }
+  .clock-card { position: absolute; left: 7%; right: 7%; top: 8%; background: rgba(255,246,230,.94); border: 3px solid var(--ink); border-radius: 24px; padding: 18px 20px 16px; text-align: center; box-shadow: 4px 4px 0 var(--ink); z-index: 3; }
+  .clock-card .lbl { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); }
+  .clock-card .time { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(3rem, 9vw, 4.4rem); letter-spacing: -.04em; line-height: 1; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
+  .bars { display: flex; gap: 4px; align-items: flex-end; height: 34px; justify-content: center; margin-bottom: 12px; }
+  .bars span { width: 7px; border-radius: 4px; background: var(--coral); animation: grow 7s ease-in-out infinite alternate; height: 4px; }
+  @keyframes grow { to { height: var(--h); } }
+  .clock-card .btn { padding: 10px 22px; font-size: .95rem; background: var(--lav); color: var(--ink); width: 100%; justify-content: center; }
+  .snooze-msg { min-height: 1.4em; margin-top: 10px; font-size: .9rem; color: var(--ink-soft); font-weight: 500; transition: opacity .3s; }
+
+  /* marquee */
+  .strip { border-block: 2px solid var(--ink); background: var(--cream2); overflow: hidden; padding: 16px 0; }
+  .strip .track { display: flex; width: max-content; animation: slide 38s linear infinite; }
+  .strip span { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.15rem; padding: 0 26px; white-space: nowrap; display: flex; align-items: center; gap: 52px; }
+  .strip span::after { content: '✺'; color: var(--coral); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* features */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; margin-top: 46px; }
+  .feat { background: var(--card); border: 2px solid var(--ink); border-radius: var(--r); padding: 28px 26px 30px; box-shadow: 6px 6px 0 var(--ink); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+  .feat:hover { transform: translateY(-6px) rotate(-.6deg); }
+  .feat .ico { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; font-size: 1.7rem; border: 2px solid var(--ink); margin-bottom: 20px; }
+  .feat:nth-child(1) .ico { background: var(--peach); } .feat:nth-child(2) .ico { background: var(--mint); } .feat:nth-child(3) .ico { background: var(--lav); } .feat:nth-child(4) .ico { background: var(--sky); }
+  .feat h3 { font-size: 1.55rem; font-weight: 700; margin-bottom: 10px; }
+  .feat p { color: var(--ink-soft); }
+
+  /* curve demo */
+  .demo { background: var(--ink); color: var(--cream); border-radius: 40px; margin: 0 14px; position: relative; overflow: hidden; }
+  .demo h2 em { color: var(--peach); }
+  .demo .kicker { color: var(--peach); }
+  .demo .sub { color: #cfc8e2; }
+  .demo-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+  @media (max-width: 860px) { .demo-grid { grid-template-columns: 1fr; } }
+  .controls { margin-top: 30px; display: grid; gap: 22px; }
+  .ctl label { display: flex; justify-content: space-between; font-weight: 700; font-size: .95rem; margin-bottom: 8px; }
+  .ctl output { color: var(--peach); font-variant-numeric: tabular-nums; }
+  input[type=time] { font: inherit; font-size: 1.2rem; font-weight: 700; color: var(--ink); background: var(--cream); border: 2px solid var(--cream); border-radius: 14px; padding: 10px 14px; width: 100%; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 10px; border-radius: 99px; background: #4a4268; outline-offset: 6px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--coral); border: 3px solid var(--cream); cursor: grab; }
+  input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--coral); border: 3px solid var(--cream); cursor: grab; }
+  .chart { background: #382f55; border-radius: 26px; padding: 22px 18px 16px; border: 2px solid #5b5080; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .readout { margin-top: 14px; font-size: 1.05rem; text-align: center; color: #e7e1f5; min-height: 3.1em; }
+  .readout b { color: var(--peach); }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; margin-top: 46px; counter-reset: s; }
+  .step { position: relative; padding-top: 74px; }
+  .step::before { counter-increment: s; content: counter(s); position: absolute; top: 0; left: 0; width: 56px; height: 56px; border-radius: 50%; background: var(--coral); color: #fff; border: 2px solid var(--ink); display: grid; place-items: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.6rem; box-shadow: 3px 3px 0 var(--ink); }
+  .step h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; } .step p { color: var(--ink-soft); }
+
+  /* pricing */
+  .toggle { display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; padding: 4px; background: var(--card); margin-top: 26px; }
+  .toggle button { font: inherit; font-weight: 700; border: 0; background: transparent; padding: 9px 20px; border-radius: 999px; cursor: pointer; color: var(--ink-soft); }
+  .toggle button.on { background: var(--ink); color: var(--cream); }
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 40px; align-items: stretch; }
+  .plan { background: var(--card); border: 2px solid var(--ink); border-radius: var(--r); padding: 32px 28px; display: flex; flex-direction: column; box-shadow: 6px 6px 0 var(--ink); position: relative; }
+  .plan.hot { background: var(--lav); transform: translateY(-10px); }
+  @media (max-width: 760px) { .plan.hot { transform: none; } }
+  .plan .tag { position: absolute; top: -15px; right: 22px; background: var(--coral); color: #fff; border: 2px solid var(--ink); border-radius: 99px; padding: 4px 14px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .plan h3 { font-size: 1.7rem; font-weight: 800; }
+  .plan .for { color: var(--ink-soft); margin: 6px 0 18px; } .plan.hot .for { color: #4a4270; }
+  .plan .amt { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 3.6rem; letter-spacing: -.04em; line-height: 1; }
+  .plan .amt small { font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--ink-soft); } .plan.hot .amt small { color: #4a4270; }
+  .plan ul { list-style: none; margin: 22px 0 28px; display: grid; gap: 11px; flex: 1; }
+  .plan li { display: flex; gap: 10px; } .plan li::before { content: '✓'; font-weight: 800; color: var(--coral); } .plan.hot li::before { color: var(--ink); }
+  .plan .btn { justify-content: center; }
+  .plan.hot .btn { background: var(--ink); color: var(--cream); box-shadow: 4px 4px 0 var(--coral); }
+
+  /* reviews */
+  .quotes { column-count: 3; column-gap: 22px; margin-top: 44px; }
+  @media (max-width: 900px) { .quotes { column-count: 2; } } @media (max-width: 580px) { .quotes { column-count: 1; } }
+  .q { break-inside: avoid; background: var(--card); border: 2px solid var(--ink); border-radius: 24px; padding: 24px; margin-bottom: 22px; box-shadow: 5px 5px 0 var(--ink); }
+  .q:nth-child(2n) { background: var(--mint); } .q:nth-child(3n) { background: var(--cream2); }
+  .q .stars { letter-spacing: 3px; color: var(--coral); margin-bottom: 8px; }
+  .q p { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.4rem; line-height: 1.2; }
+  .q cite { display: block; margin-top: 14px; font-style: normal; font-size: .85rem; font-weight: 700; color: var(--ink-soft); }
+  .disclaimer { margin-top: 10px; font-size: .85rem; color: var(--ink-soft); }
+
+  /* faq */
+  .faq { max-width: 780px; margin-top: 38px; display: grid; gap: 14px; }
+  details { background: var(--card); border: 2px solid var(--ink); border-radius: 20px; padding: 0 22px; transition: background .2s; }
+  details[open] { background: var(--cream2); box-shadow: 4px 4px 0 var(--ink); }
+  summary { list-style: none; cursor: pointer; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.22rem; letter-spacing: -.02em; padding: 20px 0; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 1.8rem; line-height: 1; color: var(--coral); transition: transform .3s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { padding: 0 0 20px; color: var(--ink-soft); }
+
+  /* final cta */
+  .final { background: var(--coral); border: 2px solid var(--ink); border-radius: 44px; text-align: center; padding: 76px 24px; margin: 0 0 40px; box-shadow: 8px 8px 0 var(--ink); position: relative; overflow: hidden; color: #fff; }
+  .final h2 { color: #fff; max-width: 780px; margin: 0 auto; } .final h2 em { color: var(--ink); }
+  .final p { margin: 18px auto 28px; max-width: 480px; color: #fff0e8; font-size: 1.12rem; }
+  .signup { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .signup input { flex: 1 1 220px; font: inherit; font-size: 1.02rem; padding: 14px 20px; border-radius: 999px; border: 2px solid var(--ink); background: var(--cream); color: var(--ink); }
+  .signup .btn { background: var(--ink); color: var(--cream); box-shadow: 4px 4px 0 #fff; }
+  .form-msg { margin-top: 16px; font-weight: 700; min-height: 1.5em; }
+
+  footer { padding: 30px 0 50px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); font-size: .9rem; }
+  footer b { color: var(--ink); }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand" aria-label="Dawdle home"><i aria-hidden="true"></i>Dawdle</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#features">Features</a><a href="#curve">Try it</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+      <a href="#join" class="btn">Join the list</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill">🦥 Now arriving. Eventually.</span>
+        <h1>Wake up. <em>Eventually.</em></h1>
+        <p class="lede">Dawdle is the alarm clock that is in absolutely no hurry. It eases you awake over as long as you like, with zero shouting, zero guilt, and snooze buttons that actively encourage you.</p>
+        <div class="cta-row">
+          <a class="btn" href="#join">Pre-order (no rush)</a>
+          <a class="btn ghost" href="#curve">Try the wake curve ↓</a>
+        </div>
+        <p class="fine">Free to start · Works on any phone · Judges nobody</p>
+      </div>
+
+      <div class="device" aria-label="Illustration of the Dawdle app at sunrise">
+        <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+        <div class="sun"></div>
+        <div class="clock-card">
+          <div class="lbl">Gently waking you at</div>
+          <div class="time" id="heroTime">6:42</div>
+          <div class="bars" id="bars" aria-hidden="true"></div>
+          <button class="btn" id="snoozeBtn" type="button">Snooze (go on)</button>
+          <div class="snooze-msg" id="snoozeMsg" role="status" aria-live="polite">Snoozes today: 0. No judgment.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Why Dawdle</span>
+        <h2>Mornings, but <em>mellow.</em></h2>
+        <p class="sub">Regular alarms treat waking up like an emergency. Dawdle treats it like a stretch.</p>
+      </div>
+      <div class="features-grid">
+        <article class="feat reveal"><div class="ico" aria-hidden="true">🌅</div><h3>The wake curve</h3><p>Sound rises from a whisper to full birdsong over 5 to 60 minutes. You pick the pace; we never rush you.</p></article>
+        <article class="feat reveal"><div class="ico" aria-hidden="true">🐦</div><h3>Polite birds</h3><p>Our birds apologize for the early start. Yes, really. They also take requests.</p></article>
+        <article class="feat reveal"><div class="ico" aria-hidden="true">😴</div><h3>Snooze-positive</h3><p>Hit snooze as often as you like. Dawdle responds with encouragement instead of a countdown of shame.</p></article>
+        <article class="feat reveal"><div class="ico" aria-hidden="true">🫖</div><h3>Zero-guilt stats</h3><p>We track how rested you feel, never how late you are. Your streak is a nice, vague "pretty good."</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="curve">
+    <div class="wrap">
+      <div class="demo-grid">
+        <div class="reveal">
+          <span class="kicker">Try it yourself</span>
+          <h2>Design your <em>perfect</em> sunrise.</h2>
+          <p class="sub">Choose when you want to be awake and how slowly you want to get there. Watch the curve change.</p>
+          <div class="controls">
+            <div class="ctl"><label for="wakeAt">I want to be awake by</label><input type="time" id="wakeAt" value="07:00"></div>
+            <div class="ctl"><label for="ramp">Take your time <output id="rampOut">25 min</output></label><input type="range" id="ramp" min="5" max="60" step="5" value="25"></div>
+          </div>
+        </div>
+        <div class="chart reveal">
+          <svg viewBox="0 0 600 280" role="img" aria-label="Chart of alarm volume rising slowly over time" id="svg">
+            <defs>
+              <linearGradient id="fillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b4a" stop-opacity=".55"/><stop offset="1" stop-color="#ff6b4a" stop-opacity="0"/></linearGradient>
+            </defs>
+            <g stroke="#5b5080" stroke-width="1" stroke-dasharray="4 6">
+              <line x1="40" y1="40" x2="570" y2="40"/><line x1="40" y1="110" x2="570" y2="110"/><line x1="40" y1="180" x2="570" y2="180"/>
+            </g>
+            <text x="12" y="44" fill="#a99fc9" font-size="13">loud</text>
+            <text x="12" y="184" fill="#a99fc9" font-size="13">soft</text>
+            <path id="area" fill="url(#fillG)"/>
+            <path id="line" fill="none" stroke="#ff6b4a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle id="dot" r="9" fill="#fff6e6" stroke="#ff6b4a" stroke-width="4"/>
+            <text id="tStart" x="40" y="222" fill="#e7e1f5" font-size="16" font-weight="700">6:35</text>
+            <text id="tEnd" x="570" y="222" fill="#e7e1f5" font-size="16" font-weight="700" text-anchor="end">7:00</text>
+            <text x="305" y="262" fill="#a99fc9" font-size="13" text-anchor="middle" id="tLabel">gentle start to full birdsong</text>
+          </svg>
+          <p class="readout" id="readout"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="reveal"><span class="kicker">How it works</span><h2>Three steps. <em>No hurry.</em></h2></div>
+      <div class="steps">
+        <div class="step reveal"><h3>Pick your finish line</h3><p>Tell Dawdle when you'd like to be properly awake. That's the only deadline you'll get.</p></div>
+        <div class="step reveal"><h3>Choose your pace</h3><p>Five quick minutes or a full hour of slow, glowing sunrise. Both are valid.</p></div>
+        <div class="step reveal"><h3>Drift awake</h3><p>Birdsong creeps in, the screen warms up, and you're up before you notice. Snooze if you want.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="kicker">Pricing</span>
+        <h2>Pay <em>whenever</em> you're ready.</h2>
+        <p class="sub">Three plans, named after how fast you're moving today.</p>
+        <div class="toggle" role="group" aria-label="Billing period">
+          <button type="button" class="on" data-bill="m">Monthly</button>
+          <button type="button" data-bill="y">Yearly (save 25%)</button>
+        </div>
+      </div>
+      <div class="price-grid">
+        <article class="plan reveal">
+          <h3>Eventually</h3><p class="for">For the casually sleepy.</p>
+          <div class="amt">$0<small> forever</small></div>
+          <ul><li>1 alarm</li><li>Basic wake curve (up to 20 min)</li><li>3 polite birds</li></ul>
+          <a class="btn ghost" href="#join">Start free</a>
+        </article>
+        <article class="plan hot reveal">
+          <span class="tag">Most popular</span>
+          <h3>Whenever</h3><p class="for">For people with a loose plan.</p>
+          <div class="amt"><span data-price data-m="4" data-y="3">$4</span><small> /month</small></div>
+          <ul><li>Unlimited alarms</li><li>Wake curve up to 60 min</li><li>12 polite birds + requests</li><li>Zero-guilt stats</li></ul>
+          <a class="btn" href="#join">Choose Whenever</a>
+        </article>
+        <article class="plan reveal">
+          <h3>Someday</h3><p class="for">For the whole household.</p>
+          <div class="amt"><span data-price data-m="9" data-y="7">$9</span><small> /month</small></div>
+          <ul><li>Everything in Whenever</li><li>Up to 5 people</li><li>Synchronized sunrise (everyone wakes together-ish)</li><li>Priority yawns</li></ul>
+          <a class="btn ghost" href="#join">Choose Someday</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="reveal"><span class="kicker">Reviews</span><h2>What the <em>imaginary</em> people say.</h2>
+        <p class="disclaimer">Dawdle is a fictional product and these reviews are made up, as part of a web design challenge.</p></div>
+      <div class="quotes">
+        <figure class="q reveal"><div class="stars">★★★★★</div><p>“I used to wake up angry. Now I wake up vaguely optimistic.”</p><cite>Someone Well-Rested, imaginary</cite></figure>
+        <figure class="q reveal"><div class="stars">★★★★★</div><p>“The birds said sorry. I forgave them instantly.”</p><cite>A Calm Pigeon, fictional</cite></figure>
+        <figure class="q reveal"><div class="stars">★★★★☆</div><p>“Lost one star because I woke up on time and felt suspicious.”</p><cite>Skeptical Sam, made up</cite></figure>
+        <figure class="q reveal"><div class="stars">★★★★★</div><p>“I hit snooze eleven times and the app said ‘love that for you.’ Life-changing.”</p><cite>The Snooze Champion, not real</cite></figure>
+        <figure class="q reveal"><div class="stars">★★★★★</div><p>“Sunrise simulator, but with feelings.”</p><cite>A Houseplant, imaginary</cite></figure>
+        <figure class="q reveal"><div class="stars">★★★★★</div><p>“My commute is still bad, but my first ten minutes are lovely.”</p><cite>Commuter Cleo, invented</cite></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="reveal"><span class="kicker">FAQ</span><h2>Questions, <em>unhurried.</em></h2></div>
+      <div class="faq reveal">
+        <details open><summary>What if I actually need to be somewhere?</summary><p>Set your finish line a little earlier than you need to leave. Dawdle never makes you late; it just doesn't make you panic.</p></details>
+        <details><summary>Does Dawdle work if I'm a heavy sleeper?</summary><p>Yes. Heavy sleepers can switch on "Persistent Politeness," which gets gradually, kindly, undeniably louder.</p></details>
+        <details><summary>Is this a real product?</summary><p>Not yet! Dawdle is a fictional product built as a landing-page design exercise. The email form below doesn't store anything.</p></details>
+        <details><summary>Why are the plans called Eventually, Whenever and Someday?</summary><p>Because naming them Basic, Pro and Enterprise felt too much like a Monday.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" style="padding-top:30px">
+    <div class="wrap">
+      <div class="final reveal">
+        <h2>Ready to wake up <em>slowly?</em></h2>
+        <p>Join the list. We'll email you when Dawdle launches. Or whenever we get around to it.</p>
+        <form class="signup" id="signup" novalidate>
+          <input type="email" id="email" placeholder="you@email.com" aria-label="Email address" autocomplete="email" required>
+          <button class="btn" type="submit">Notify me, eventually</button>
+        </form>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span><b>Dawdle</b> · a fictional product · Day 03 / 07 of 7 days, 7 websites</span>
+    <span>Built with HTML, CSS &amp; vanilla JavaScript</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav shadow */
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 10);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* marquee */
+  const words = ['Wake up slowly', 'Birds that apologize', 'Snooze with pride', 'No alarms, only suggestions', 'Mornings, but mellow', 'Eventually, always'];
+  const run = words.map(w => `<span>${w}</span>`).join('');
+  $('#track').innerHTML = run + run;
+
+  /* hero bars + clock */
+  const bars = $('#bars');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.style.setProperty('--h', (8 + Math.pow(i / 17, 1.6) * 26).toFixed(0) + 'px');
+    s.style.animationDelay = (i * 0.25) + 's';
+    bars.appendChild(s);
+  }
+  const heroTime = $('#heroTime');
+  let hm = 6 * 60 + 42;
+  const fmt = m => { m = ((m % 1440) + 1440) % 1440; const h24 = Math.floor(m / 60), mm = m % 60, h = h24 % 12 || 12; return h + ':' + String(mm).padStart(2, '0'); };
+  const fmtAP = m => { m = ((m % 1440) + 1440) % 1440; return fmt(m) + (m < 720 ? ' am' : ' pm'); };
+  heroTime.textContent = fmt(hm);
+  setInterval(() => { hm += 1; heroTime.textContent = fmt(hm); }, 7000);
+
+  /* snooze */
+  const msgs = ['Take your time.', 'Five more minutes? Make it ten.', 'The birds can wait.', 'Love that for you.', 'Honestly, same.', 'The sun isn’t going anywhere.', 'Rest is a feature.', 'We’ll be here. No pressure.'];
+  let sn = 0;
+  const sm = $('#snoozeMsg');
+  $('#snoozeBtn').addEventListener('click', () => {
+    sn++; hm += 9; heroTime.textContent = fmt(hm);
+    sm.textContent = `Snoozes today: ${sn}. ${msgs[(sn - 1) % msgs.length]}`;
+  });
+
+  /* wake curve demo */
+  const wakeAt = $('#wakeAt'), ramp = $('#ramp'), rampOut = $('#rampOut');
+  const lineP = $('#line'), areaP = $('#area'), dot = $('#dot');
+  const X0 = 40, X1 = 570, YB = 180, YT = 40;
+  const pts = [];
+  for (let i = 0; i <= 80; i++) { const t = i / 80, v = Math.pow(t, 2.3); pts.push([X0 + t * (X1 - X0), YB - v * (YB - YT)]); }
+  const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  lineP.setAttribute('d', d);
+  areaP.setAttribute('d', d + ` L${X1} ${YB} L${X0} ${YB} Z`);
+  dot.setAttribute('cx', X1); dot.setAttribute('cy', YT);
+  const feel = r => r <= 10 ? 'A brisk little sunrise.' : r <= 25 ? 'A pleasant, unhurried wake-up.' : r <= 40 ? 'Properly leisurely. Nice.' : 'Gloriously slow. Peak Dawdle.';
+  function update() {
+    const r = +ramp.value;
+    rampOut.textContent = r + ' min';
+    const [h, m] = (wakeAt.value || '07:00').split(':').map(Number);
+    const end = h * 60 + m, start = end - r, mid = end - Math.round(r / 2);
+    $('#tStart').textContent = fmtAP(start).replace(' am', '').replace(' pm', '');
+    $('#tEnd').textContent = fmtAP(end).replace(' am', '').replace(' pm', '');
+    $('#readout').innerHTML = `Whisper at <b>${fmtAP(start)}</b>, halfway-ish by <b>${fmtAP(mid)}</b>, full birdsong at <b>${fmtAP(end)}</b>.<br>${feel(r)}`;
+  }
+  ramp.addEventListener('input', update); wakeAt.addEventListener('input', update); update();
+
+  /* pricing toggle */
+  $$('.toggle button').forEach(b => b.addEventListener('click', () => {
+    $$('.toggle button').forEach(x => x.classList.toggle('on', x === b));
+    const key = b.dataset.bill;
+    $$('[data-price]').forEach(p => { p.textContent = '$' + p.dataset[key]; });
+  }));
+
+  /* signup (nothing is stored or sent) */
+  const form = $('#signup'), msg = $('#formMsg');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('#email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg.textContent = 'Hmm, that doesn’t look like an email. Take your time.'; return; }
+    msg.textContent = 'You’re on the list… eventually. (This is a demo, so nothing was saved.)';
+    form.reset();
+  });
+
+  /* reveal */
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.12 });
+    $$('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  } else { $$('.reveal').forEach(el => el.classList.add('in')); }
+})();
+</script>
+</body>
+</html>
